@@ -20,7 +20,7 @@ fetch("https://restcountries.com/v3.1/all")
         Countries = data.map(country => {
             // CARD
             const link = document.createElement("a")
-            link.setAttribute("href", country.name.common + ".html");
+            link.setAttribute("href", "country.html?country=" + country.name.common);
             const card = document.createElement("div")
             card.classList.add("card")
             // FLAG
@@ -52,7 +52,6 @@ fetch("https://restcountries.com/v3.1/all")
             card.append(flag)
             card.append(body)
             userCardContainer.append(link)
-
 
             // const card = userCardTemplate.content.cloneNode(true).children[0]
             // const header = card.querySelector("[data-header]")
@@ -96,4 +95,18 @@ document.addEventListener('mouseup', function (e) {
             dropdown.classList.remove('show');
         }
     }
+})
+
+// FILTER
+
+let filter = dropdown.querySelectorAll(".filter");
+
+filter.forEach((element) => {
+    element.addEventListener('click', () => {
+        dropbtn.textContent = element.textContent;
+        Countries.forEach(country => {
+            const isVisible = country.region.includes(element.textContent)
+            country.element.classList.toggle("hide", !isVisible)
+        })
+    })
 })
