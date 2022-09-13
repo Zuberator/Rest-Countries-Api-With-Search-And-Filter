@@ -15,7 +15,9 @@
     <header>
         <nav>
             <h2>Where in the world?</h2>
-            <div class="dark"><iconify-icon inline icon="ri:moon-line" width="20" height="20"></iconify-icon>&nbsp&nbspDark Mode</div>
+            <div id="dark">
+                <iconify-icon inline icon="ri:moon-line" width="20" height="20"></iconify-icon>&nbsp&nbspDark Mode
+            </div>
         </nav>
     </header>
 
@@ -23,9 +25,14 @@
         <div class="wrapper">
             <div class="search-wrapper">
 
-                <input type="search" id="search" placeholder="Search for a country..." data-search>
+                <div class="search-input">
+                    <input type="search" id="search" placeholder="Search for a country..." data-search>
+                    <iconify-icon icon="ri:search-line"></iconify-icon>
+                </div>
+
                 <div class="dropdown">
-                    <button onclick="myFunction()" class="dropbtn">Filter by Region</button>
+                    <button id="dropbtn" class="dropbtn">Filter by Region</button>
+                    <iconify-icon icon="ri:arrow-down-s-line"></iconify-icon>
                     <div id="myDropdown" class="dropdown-content">
                         <a href="#">Africa</a>
                         <a href="#">America</a>
@@ -34,15 +41,18 @@
                         <a href="#">Oceania</a>
                     </div>
                 </div>
+
             </div>
 
             <div class="user-cards" data-user-cards-container></div>
+
             <template data-user-template>
                 <div class="card">
                     <div class="header" data-header></div>
                     <div class="body" data-body></div>
                 </div>
             </template>
+
         </div>
     </main>
 

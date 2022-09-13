@@ -1,4 +1,4 @@
-const userCardTemplate = document.querySelector("[data-user-template]")
+// const userCardTemplate = document.querySelector("[data-user-template]")
 const userCardContainer = document.querySelector("[data-user-cards-container]")
 const searchInput = document.querySelector("[data-search]")
 
@@ -19,15 +19,14 @@ fetch("https://restcountries.com/v3.1/all")
     .then(data => {
         Countries = data.map(country => {
             // CARD
+            const link = document.createElement("a")
+            link.setAttribute("href", country.name.common + ".html");
             const card = document.createElement("div")
             card.classList.add("card")
             // FLAG
             const flag = document.createElement("img")
             flag.classList.add("flag")
             flag.setAttribute("src", country.flags.png);
-            // const flag = document.createElement("div")
-            // flag.classList.add("flag")
-            // flag.style.backgroundImage = `url('${country.flags.png}')`;
             // BODY
             const body = document.createElement("div")
             body.classList.add("body")
@@ -49,9 +48,10 @@ fetch("https://restcountries.com/v3.1/all")
             capital.innerHTML = "Capital: " + `<span>${country.capital}</span>`
             // APPEND
             body.append(name, population, region, capital)
+            link.append(card)
             card.append(flag)
             card.append(body)
-            userCardContainer.append(card)
+            userCardContainer.append(link)
 
 
             // const card = userCardTemplate.content.cloneNode(true).children[0]
@@ -67,27 +67,33 @@ fetch("https://restcountries.com/v3.1/all")
                 population: country.population,
                 region: country.region,
                 capital: country.capital && country.capital[0] || "",
-                element: card
+                element: link
+                // element: card
             }
         })
     })
 
-/* When the user clicks on the button, 
-toggle between hiding and showing the dropdown content */
-function myFunction() {
-    document.getElementById("myDropdown").classList.toggle("show");
-}
+// DARKMODE
 
-// Close the dropdown menu if the user clicks outside of it
-window.onclick = function (event) {
-    if (!event.target.matches('.dropbtn')) {
-        var dropdowns = document.getElementsByClassName("dropdown-content");
-        var i;
-        for (i = 0; i < dropdowns.length; i++) {
-            var openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains('show')) {
-                openDropdown.classList.remove('show');
-            }
+let dark = document.getElementById("dark");
+
+dark.addEventListener('click', () => {
+    document.body.classList.toggle("dark");
+})
+
+// DROPDOWN
+
+let dropdown = document.getElementById("myDropdown");
+let dropbtn = document.getElementById("dropbtn");
+
+dropbtn.addEventListener('click', () => {
+    dropdown.classList.toggle("show");
+})
+
+document.addEventListener('mouseup', function (e) {
+    if (!e.target.matches(".dropbtn")) {
+        if (dropdown.classList.contains('show')) {
+            dropdown.classList.remove('show');
         }
     }
-}
+})

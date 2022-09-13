@@ -5,166 +5,69 @@ body {
     flex-direction: column;
     min-height: 100vh;
     margin: 0 auto;
-    background: #fafafa;
+    background: hsl(0, 0%, 100%);
+}
+
+.hide {display: none !important;}
+.show {display: block !important;}
+
+body.dark,
+body.dark header,
+body.dark .dropdown #dropbtn,
+body.dark .dropdown iconify-icon,
+body.dark .dropdown #myDropdown,
+body.dark .dropdown #myDropdown a,
+body.dark .search-wrapper .search-input input[type="search"],
+body.dark .user-cards a .card {
+    color: #fff;
+    background: hsl(0, 0%, 0%);
+    box-shadow: none;
+}
+
+body.dark {
+    background: hsl(0, 0%, 10%)
 }
 
 /* HEADER */
 
-header {
-    width: 100vw;
-    background: #fff;
-    box-shadow: 0px 0px 10px 10px #f2f2f2;
-}
-
-header nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 5rem;
-}
-
-header nav h2 {
-    font-weight: 600;
-}
-
-header nav .dark {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+header {width: 100vw; background: hsl(0, 0%, 100%); box-shadow: 0px 0px 5px 5px #f2f2f2;}
+header nav {display: flex; justify-content: space-between; align-items: center; padding: 0 5vw;}
+header nav h2 {font-size: clamp(1em, 5vw, 1.75em); font-weight: 600;}
+header nav #dark {display: flex; justify-content: space-between; align-items: center; cursor: pointer;}
 
 /* MAIN */
 
-main {
-    width: 100vw;
-}
-
-main .wrapper {
-    padding: 0 5rem;
-}
+main {width: 100vw;}
+main .wrapper {padding: 0 5vw;}
 
 /* SEARCH */
 
-.search-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    padding: 3rem 0 0 0;
-    gap: 3rem;
-}
-
-input[type="search"] {
-    width: 100%;
-    max-width: 500px;
-    padding: 1rem;
-    border: none;
-    box-shadow: 0px 0px 5px 5px #f2f2f2;
-    border-radius: 5px;
-    background: url('https://api.iconify.design/ri/search-line.svg') no-repeat 1.5rem center;
-    background-size: 1.5rem;
-    padding-left: 4.5rem;
-}
-
-.hide {
-    display: none;
-}
+.search-wrapper {display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; padding: 3rem 0 0 0; gap: 3rem;}
+.search-wrapper .search-input {position: relative; width: 100%; max-width: 500px;}
+.search-wrapper .search-input input[type="search"] {width: 100%; padding: 1rem 1rem 1rem 4.5rem; border: none; box-shadow: 0px 0px 5px 5px #f2f2f2; border-radius: 5px;}
+.search-wrapper .search-input iconify-icon {position: absolute; font-size: 24px; top: 16px; left: 5%; color: #ccc;}
 
 /* FILTER */
 
-.dropbtn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 150px;
-    padding: 1rem 3rem 1rem 1rem;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    box-shadow: 0px 0px 5px 5px #f2f2f2;
-    background: url('https://api.iconify.design/ri/arrow-down-s-line.svg?width=16&height=16') no-repeat right 1rem center;
-}
-
-#myDropdown.show .dropdown {
-    outline: 3px solid #2980B9;
-}
-
-button:has(.dropbtn) #myDropdown {
-    outline: 3px solid #2980B9;
-  }
-
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    top: 105%;
-    background-color: #fff;
-    border-radius: 5px;
-    width: 150px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-}
-
-.dropdown-content a {
-    color: black;
-    font-size: .75rem;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-.dropdown-content a:first-child {border-radius: 5px 5px 0 0;}
-.dropdown-content a:last-child {border-radius: 0 0 5px 5px;}
-.dropdown-content a:hover {background-color: #ddd;}
-.show {display: block;}
+.dropdown {position: relative; display: inline-block; width: 100%; max-width: 200px;}
+.dropdown .dropbtn {display: flex; align-items: center; width: 100%; padding: 1rem 3rem 1rem 1rem; border: none; cursor: pointer; background: #fff; border-radius: 5px; box-shadow: 0px 0px 5px 5px #f2f2f2;}
+.dropdown iconify-icon {position: absolute; font-size: 24px; top: 13px; right: 10%;}
+.dropdown .dropdown-content {display: none; position: absolute; top: 105%; width: 100%; background: #fff; border-radius: 5px; box-shadow: 0px 0px 5px 5px #f2f2f2;}
+.dropdown .dropdown-content a {color: #000; font-size: .75rem; padding: 16px; text-decoration: none; display: block;}
+.dropdown .dropdown-content a:first-child {border-radius: 5px 5px 0 0;}
+.dropdown .dropdown-content a:last-child {border-radius: 0 0 5px 5px;}
+.dropdown .dropdown-content a:hover {background-color: #ddd;}
 
 /* CARD */
 
-.user-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    grid-gap: 5rem;
-    padding: 3rem 0;
-
-    /* display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem; */
-}
-
-.card {
-    background: #fff;
-    border-radius: 5px;
-    box-shadow: 0px 0px 5px 5px #f2f2f2;
-}
-
-.flag {
-    display: block;
-    width: 100%;
-    height: 200px;
-    border-radius: 5px 5px 0 0;
-}
-
-.card .body {
-    padding: 1rem;
-}
-
-.user-cards p {
-    font-weight: 500;
-}
-
-.user-cards p span {
-    font-weight: normal;
-    color: #777
-}
+.user-cards {display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); grid-gap: 5rem; padding: 3rem 0;}
+.user-cards a {text-decoration: none; color: #000;}
+.user-cards a .card {border-radius: 5px;box-shadow: 0px 0px 5px 5px #f2f2f2;}
+.user-cards a .card .flag {display: block; width: 100%; height: 200px;border-radius: 5px 5px 0 0;}
+.user-cards a .card .body {padding: 1rem;}
+.user-cards a .card .body p {font-weight: 500;}
+.user-cards a .card .body p span {font-weight: normal; color: #777}
 
 /* FOOTER */
 
-footer {
-    height: 3rem;
-}
+footer {height: 3rem;}
