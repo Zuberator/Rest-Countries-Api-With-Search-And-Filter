@@ -14,9 +14,11 @@
 
     <header>
         <nav>
-            <a href="./"><h2>Where in the world?</h2></a>
+            <a href="./">
+                <h2>Where in the world?</h2>
+            </a>
             <div id="dark">
-                <iconify-icon inline icon="ri:moon-line" width="20" height="20"></iconify-icon>&nbsp&nbspDark Mode
+                <iconify-icon inline icon="ri:moon-line"></iconify-icon>&nbsp&nbspDark Mode
             </div>
         </nav>
     </header>
@@ -31,8 +33,7 @@
                 </div>
 
                 <div class="dropdown">
-                    <button id="dropbtn" class="dropbtn">Filter by Region</button>
-                    <iconify-icon icon="ri:arrow-down-s-line"></iconify-icon>
+                    <button id="dropbtn">Filter by Region</button>
                     <div id="myDropdown" class="dropdown-content">
                         <a href="#" class="filter">Africa</a>
                         <a href="#" class="filter">America</a>
@@ -44,13 +45,22 @@
 
             </div>
 
-            <div class="user-cards" data-user-cards-container></div>
+            <div class="user-cards" data-container></div>
 
-            <template data-user-template>
-                <div class="card">
-                    <div class="header" data-header></div>
-                    <div class="body" data-body></div>
-                </div>
+            <template data-template>
+                <a class="link" data-link>
+                    <div class="card">
+                        <img class="flag" data-image>
+                        <div class="body">
+                            <h4 class="name" data-name></h4>
+                            <div class="info">
+                                <p class="population" data-population></p>
+                                <p class="region" data-region></p>
+                                <p class="capital" data-capital></p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
             </template>
 
         </div>

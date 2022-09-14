@@ -5,7 +5,7 @@
     <title>Countries</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <script defer src="functions.js"></script>
+    <!-- <script defer src="functions.js"></script> -->
     <script defer src="https://code.iconify.design/iconify-icon/1.0.0/iconify-icon.min.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -23,70 +23,175 @@
         </nav>
     </header>
 
+    <style>
+        #backbutton {
+            position: relative;
+            width: 9rem;
+            padding: .75rem 3rem;
+            justify-content: flex-end;
+        }
+
+        #backbutton::after {
+            content: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M7.828 11H20v2H7.828l5.364 5.364l-1.414 1.414L4 12l7.778-7.778l1.414 1.414z"%2F%3E%3C%2Fsvg%3E');
+            position: absolute;
+            left: 3rem;
+        }
+
+        img {height: auto;}
+        .user-cards {display: block;}
+        .user-cards .card {display: flex; flex-direction: row; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 5rem}
+        /* .user-cards .card .image {flex: 1 0 0; width: 100%;} */
+        .user-cards .card .flag {display: block; width: 600px}
+        .user-cards .card .body {box-sizing: border-box;}
+        .user-cards .card .body h4 {font-size: 1.5rem;}
+        .user-cards .card .body .info {display: flex; flex-direction: row; flex-wrap: wrap; gap: 5rem}
+        .user-cards .card .body .info p {font-size: .8rem; margin: 5px 0; font-weight: 500;}
+        .user-cards .card .body .info p span {font-weight: normal; color: #777}
+        .user-cards .card .body .sub-info p {font-size: .8rem; margin: 5px 0; font-weight: 500;}
+        .user-cards .card .body .sub-info p span {font-weight: normal; color: #777}
+    </style>
+
+    <main>
+        <div class="wrapper">
+
+            <div class="search-wrapper">
+                <a href="./"><button id="backbutton">Back</button></a>
+            </div>
+
+            <div class="user-cards" data-user-cards-container></div>
+
+            <template data-template>
+                    <div class="card">
+                        <div class="image"><img class="flag" data-image></div>
+                        <div class="body">
+                            <h4 class="name" data-name></h4>
+                            <div class="info">
+                                <div class="info-left">
+                                    <p class="native-name" data-native-name></p>
+                                    <p class="population" data-population></p>
+                                    <p class="region" data-region></p>
+                                    <p class="sub-region" data-sub-region></p>
+                                    <p class="capital" data-capital></p>
+                                </div>
+                                <div class="info-right">
+                                    <p class="top-level-domain" data-tld></p>
+                                    <p class="currencies" data-currencies></p>
+                                    <p class="languages" data-languages></p>
+                                </div>
+                            </div>
+                            <div class="sub-info">
+                                <p class="border-countries" data-border-countries></p>
+                            </div>
+                        </div>
+                    </div>
+            </template>
+
+        </div>
+    </main>
+
+    <footer></footer>
+
     <script>
+        const userCardTemplate = document.querySelector("[data-template]")
+        const userCardContainer = document.querySelector("[data-user-cards-container]")
         const countryName = new URLSearchParams(window.location.search).get('country')
+
+        let countries = []
 
         fetch("https://restcountries.com/v3.1/all")
             .then(res => res.json())
             .then(data => {
                 Countries = data.map(country => {
                     if (country.name.common === countryName) {
-                        // CARD
-                        const card = document.createElement("div")
-                        card.classList.add("card")
-                        // FLAG
-                        const flag = document.createElement("img")
-                        flag.classList.add("flag")
-                        flag.setAttribute("src", country.flags.png);
-                        // BODY
-                        const body = document.createElement("div")
-                        body.classList.add("body")
-                        // NAME
-                        const name = document.createElement("h4")
-                        name.classList.add("name")
-                        name.textContent = country.name.common
-                        // NATIVENAME
-                        const nativeName = document.createElement("p")
-                        nativeName.classList.add("nativename")
-                        nativeName.innerHTML = "Native Name: " + `<span>${Object.values(country.name.nativeName)[0].common}</span>`
-                        // POPULATION
-                        const population = document.createElement("p")
-                        population.classList.add("population")
-                        population.innerHTML = "Population: " + `<span>${country.population}</span>`
-                        // REGION
-                        const region = document.createElement("p")
-                        region.classList.add("region")
-                        region.innerHTML = "Region: " + `<span>${country.region}</span>`
-                        // SUBREGION
-                        const subRegion = document.createElement("p")
-                        subRegion.classList.add("subregion")
-                        subRegion.innerHTML = "Sub Region: " + `<span>${country.subRegion}</span>`
-                        // CAPITAL
-                        const capital = document.createElement("p")
-                        capital.classList.add("capital")
-                        capital.innerHTML = "Capital: " + `<span>${country.capital}</span>`
-                        // TOPLEVELDOMAIN
-                        const topLevelDomain = document.createElement("p")
-                        topLevelDomain.classList.add("topleveldomain")
-                        topLevelDomain.innerHTML = "Top Level Domain: " + `<span>${country.tld}</span>`
-                        // CURRENCIES
-                        const currencies = document.createElement("p")
-                        currencies.classList.add("currencies")
-                        currencies.innerHTML = "Currencies: " + `<span>${Object.values(country.currencies)[0].name}</span>`
-                        // LANGUAGES
-                        const languages = document.createElement("p")
-                        languages.classList.add("languages")
-                        languages.innerHTML = "Languages: " + `<span>${Object.values(country.languages)}</span>`
-                        // BORDERCOUNTRIES
-                        const borderCountries = document.createElement("p")
-                        borderCountries.classList.add("bordercountries")
-                        borderCountries.innerHTML = "Border Countries: " + `<span>${country.borders}</span>`
 
-                        // APPEND
-                        body.append(name, nativeName, population, region, capital, topLevelDomain, currencies, languages, borderCountries)
-                        card.append(flag)
-                        card.append(body)
+                        const card = userCardTemplate.content.cloneNode(true).children[0]
+                        const image = card.querySelector("[data-image]")
+                        const name = card.querySelector("[data-name]")
+
+                        const nativeName = card.querySelector("[data-native-name]")
+                        const population = card.querySelector("[data-population]")
+                        const region = card.querySelector("[data-region]")
+                        const subRegion = card.querySelector("[data-sub-region]")
+                        const capital = card.querySelector("[data-capital]")
+
+                        const topLevelDomain = card.querySelector("[data-tld]")
+                        const currencies = card.querySelector("[data-currencies]")
+                        const languages = card.querySelector("[data-languages]")
+
+                        const borderCountries = card.querySelector("[data-border-countries]")
+
+                        console.log(card, image, name, nativeName, population, region, subRegion, capital, borderCountries)
+                        image.setAttribute("src", country.flags.png);
+                        name.textContent = country.name.common
+                        nativeName.innerHTML = "Native Name: " + `<span>${Object.values(country.name.nativeName)[0].common}</span>`
+                        population.innerHTML = "Population: " + `<span>${country.population}</span>`
+                        region.innerHTML = "Region: " + `<span>${country.region}</span>`
+                        subRegion.innerHTML = "Sub Region: " + `<span>${country.subregion}</span>`
+                        capital.innerHTML = "Capital: " + `<span>${country.capital}</span>`
+                        topLevelDomain.innerHTML = "Top Level Domain: " + `<span>${country.tld}</span>`
+                        currencies.innerHTML = "Currencies: " + `<span>${Object.values(country.currencies)[0].name}</span>`
+                        languages.innerHTML = "Languages: " + `<span>${Object.values(country.languages)}</span>`
+                        borderCountries.innerHTML = "Border Countries: " + `<span>${country.borders}</span>`
                         userCardContainer.append(card)
+
+
+
+                        // // CARD
+                        // const card = document.createElement("div")
+                        // card.classList.add("card")
+                        // // FLAG
+                        // const flag = document.createElement("img")
+                        // flag.classList.add("flag")
+                        // flag.setAttribute("src", country.flags.png);
+                        // // BODY
+                        // const body = document.createElement("div")
+                        // body.classList.add("body")
+                        // // NAME
+                        // const name = document.createElement("h4")
+                        // name.classList.add("name")
+                        // name.textContent = country.name.common
+                        // // NATIVENAME
+                        // const nativeName = document.createElement("p")
+                        // nativeName.classList.add("nativename")
+                        // nativeName.innerHTML = "Native Name: " + `<span>${Object.values(country.name.nativeName)[0].common}</span>`
+                        // // POPULATION
+                        // const population = document.createElement("p")
+                        // population.classList.add("population")
+                        // population.innerHTML = "Population: " + `<span>${country.population}</span>`
+                        // // REGION
+                        // const region = document.createElement("p")
+                        // region.classList.add("region")
+                        // region.innerHTML = "Region: " + `<span>${country.region}</span>`
+                        // // SUBREGION
+                        // const subRegion = document.createElement("p")
+                        // subRegion.classList.add("subregion")
+                        // subRegion.innerHTML = "Sub Region: " + `<span>${country.subRegion}</span>`
+                        // // CAPITAL
+                        // const capital = document.createElement("p")
+                        // capital.classList.add("capital")
+                        // capital.innerHTML = "Capital: " + `<span>${country.capital}</span>`
+                        // // TOPLEVELDOMAIN
+                        // const topLevelDomain = document.createElement("p")
+                        // topLevelDomain.classList.add("topleveldomain")
+                        // topLevelDomain.innerHTML = "Top Level Domain: " + `<span>${country.tld}</span>`
+                        // // CURRENCIES
+                        // const currencies = document.createElement("p")
+                        // currencies.classList.add("currencies")
+                        // currencies.innerHTML = "Currencies: " + `<span>${Object.values(country.currencies)[0].name}</span>`
+                        // // LANGUAGES
+                        // const languages = document.createElement("p")
+                        // languages.classList.add("languages")
+                        // languages.innerHTML = "Languages: " + `<span>${Object.values(country.languages)}</span>`
+                        // // BORDERCOUNTRIES
+                        // const borderCountries = document.createElement("p")
+                        // borderCountries.classList.add("bordercountries")
+                        // borderCountries.innerHTML = "Border Countries: " + `<span>${country.borders}</span>`
+
+                        // // APPEND
+                        // body.append(name, nativeName, population, region, capital, topLevelDomain, currencies, languages, borderCountries)
+                        // card.appendChild(flag)
+                        // card.appendChild(body)
+                        // userCardContainer.appendChild(card)
 
                         return {
                             flag: country.flags.png,
@@ -105,39 +210,16 @@
                     }
                 })
             })
+
+        // ---------- DARKMODE ----------
+
+        let dark = document.getElementById("dark");
+
+        dark.addEventListener('click', () => {
+            document.body.classList.toggle("dark");
+        })
     </script>
-
-    <main>
-        <div class="wrapper">
-
-            <div class="user-cards" data-user-cards-container></div>
-
-        </div>
-    </main>
-
-    <footer></footer>
 
 </body>
 
 </html>
-
-
-
-<!-- $id = $_GET["id"];
-
-
-<?php
-$id = $_GET["id"];
-$res = $db->query("SELECT * FROM blog WHERE id=$id");
-foreach ($res as $row) { {
-    echo "<div class='blog-big' data-inviewport='top-load' style='--delay:1s'>";
-    echo "<h1>" . $row['Title'] . "</h1>";
-    echo "<img src='" . $row["Image"] . "' loading='lazy' alt='Avatar' class=''/>";
-    echo "<p>" . $row['Text'] . "</p>";
-    echo "<p>Napisane przez " . $row['User'] . " w dniu " . $row['Date'] . "</p>";
-    echo "<p>KOMENTARZE</p>";
-    echo "</div>";
-  }
-  $dbh = null;
-}
-?> -->

@@ -10,10 +10,11 @@ body {
 
 .hide {display: none !important;}
 .show {display: block !important;}
+a:any-link {color: #000; text-decoration: none;}
 
 body.dark,
 body.dark header,
-body.dark .dropdown #dropbtn,
+body.dark button,
 body.dark .dropdown iconify-icon,
 body.dark .dropdown #myDropdown,
 body.dark .dropdown #myDropdown a,
@@ -28,13 +29,14 @@ body.dark {
     background: hsl(0, 0%, 10%)
 }
 
+body.dark header nav h2 {color: #fff;}
+
 /* HEADER */
 
 header {width: 100vw; background: hsl(0, 0%, 100%); box-shadow: 0px 0px 5px 5px #f2f2f2;}
-header nav {display: flex; justify-content: space-between; align-items: center; padding: 0 5vw;}
-header nav a {text-decoration: none; color: #000;}
-header nav h2 {font-size: clamp(1em, 5vw, 1.75em); font-weight: 600;}
-header nav #dark {display: flex; justify-content: space-between; align-items: center; cursor: pointer;}
+header nav {display: flex; justify-content: space-between; align-items: center; height: 75px; padding: 0 5vw;}
+header nav h2 {font-size: clamp(.75em, 4vw, 1.5em); font-weight: 600;}
+header nav #dark {display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-size: clamp(.5em, 3vw, 1em);}
 
 /* MAIN */
 
@@ -50,11 +52,13 @@ main .wrapper {padding: 0 5vw;}
 
 /* FILTER */
 
+button {display: flex; align-items: center; padding: 1rem; border: none; cursor: pointer; background: #fff; border-radius: 5px; box-shadow: 0px 0px 5px 5px #f2f2f2;}
 .dropdown {position: relative; display: inline-block; width: 100%; max-width: 200px;}
-.dropdown .dropbtn {display: flex; align-items: center; width: 100%; padding: 1rem 3rem 1rem 1rem; border: none; cursor: pointer; background: #fff; border-radius: 5px; box-shadow: 0px 0px 5px 5px #f2f2f2;}
+.dropdown #dropbtn {width: 100%; padding: 1rem 3rem 1rem 1rem;}
+.dropdown #dropbtn::after {content: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="m12 13.172l4.95-4.95l1.414 1.414L12 16L5.636 9.636L7.05 8.222z"%2F%3E%3C%2Fsvg%3E'); position: absolute; right: 1rem;}
 .dropdown iconify-icon {position: absolute; font-size: 24px; top: 13px; right: 10%;}
 .dropdown .dropdown-content {display: none; position: absolute; top: 105%; width: 100%; background: #fff; border-radius: 5px; box-shadow: 0px 0px 5px 5px #f2f2f2;}
-.dropdown .dropdown-content a {color: #000; font-size: .75rem; padding: 16px; text-decoration: none; display: block;}
+.dropdown .dropdown-content a {font-size: .75rem; padding: 16px; display: block;}
 .dropdown .dropdown-content a:first-child {border-radius: 5px 5px 0 0;}
 .dropdown .dropdown-content a:last-child {border-radius: 0 0 5px 5px;}
 .dropdown .dropdown-content a:hover {background-color: #ddd;}
@@ -62,12 +66,12 @@ main .wrapper {padding: 0 5vw;}
 /* CARD */
 
 .user-cards {display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); grid-gap: 5rem; padding: 3rem 0;}
-.user-cards a {text-decoration: none; color: #000;}
-.user-cards a .card {border-radius: 5px;box-shadow: 0px 0px 5px 5px #f2f2f2;}
-.user-cards a .card .flag {display: block; width: 100%; height: 200px;border-radius: 5px 5px 0 0;}
-.user-cards a .card .body {padding: 1rem;}
-.user-cards a .card .body p {font-weight: 500;}
-.user-cards a .card .body p span {font-weight: normal; color: #777}
+.user-cards a .card {border-radius: 5px; box-shadow: 0px 0px 5px 5px #f2f2f2;}
+.user-cards a .card .flag {display: block; width: 100%; border-radius: 5px 5px 0 0; aspect-ratio: 160/98;}
+.user-cards a .card .body {padding: 1.5rem;}
+.user-cards a .card .body .info > * {font-size: .8rem; margin: 5px 0;}
+.user-cards a .card .body .info p {font-weight: 500;}
+.user-cards a .card .body .info p span {font-weight: normal; color: #777}
 
 /* FOOTER */
 
