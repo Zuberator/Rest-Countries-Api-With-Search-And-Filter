@@ -5,7 +5,9 @@
     <title>Countries</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <script defer src="functions.js"></script>
+    <script type="module" defer src="functions.js"></script>
+    <script type="module" defer src="render-dashboard.js"></script>
+    <script type="module" defer src="render-detail.js"></script>
     <script defer src="https://code.iconify.design/iconify-icon/1.0.0/iconify-icon.min.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -24,7 +26,7 @@
     </header>
 
     <main>
-        <div class="wrapper">
+        <div class="wrapper" main-container>
             <div class="search-wrapper">
 
                 <div class="search-input">
@@ -45,7 +47,7 @@
 
             </div>
 
-            <div class="user-cards" data-container></div>
+            <div data-container></div>
 
             <template data-template>
                 <a class="link" data-link>
@@ -61,6 +63,32 @@
                         </div>
                     </div>
                 </a>
+            </template>
+
+            <template data-template-details>
+                <div class="details-card">
+                    <div class="image"><img class="flag" data-image></div>
+                    <div class="body">
+                        <h4 class="name" data-name></h4>
+                        <div class="info">
+                            <div class="info-left">
+                                <p class="native-name" data-native-name></p>
+                                <p class="population" data-population></p>
+                                <p class="region" data-region></p>
+                                <p class="sub-region" data-sub-region></p>
+                                <p class="capital" data-capital></p>
+                            </div>
+                            <div class="info-right">
+                                <p class="top-level-domain" data-tld></p>
+                                <p class="currencies" data-currencies></p>
+                                <p class="languages" data-languages></p>
+                            </div>
+                        </div>
+                        <div class="sub-info">
+                            <p>Border Countries: <span class="border-countries" data-border-countries></span></p>
+                        </div>
+                    </div>
+                </div>
             </template>
 
         </div>

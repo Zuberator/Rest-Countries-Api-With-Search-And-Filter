@@ -101,7 +101,7 @@
         fetch("https://restcountries.com/v3.1/all")
             .then(res => res.json())
             .then(data => {
-                Countries = data.map(country => {
+                countries = data.map(country => {
                     if (country.name.common === countryName) {
 
                         const card = userCardTemplate.content.cloneNode(true).children[0]
@@ -124,7 +124,7 @@
                         image.setAttribute("src", country.flags.png);
                         name.textContent = country.name.common
                         nativeName.innerHTML = "Native Name: " + `<span>${Object.values(country.name.nativeName)[0].common}</span>`
-                        population.innerHTML = "Population: " + `<span>${country.population}</span>`
+                        population.innerHTML = "Population: " + `<span>${country.population.toLocaleString()}</span>`
                         region.innerHTML = "Region: " + `<span>${country.region}</span>`
                         subRegion.innerHTML = "Sub Region: " + `<span>${country.subregion}</span>`
                         capital.innerHTML = "Capital: " + `<span>${country.capital}</span>`
@@ -133,65 +133,6 @@
                         languages.innerHTML = "Languages: " + `<span>${Object.values(country.languages)}</span>`
                         borderCountries.innerHTML = "Border Countries: " + `<span>${country.borders}</span>`
                         userCardContainer.append(card)
-
-
-
-                        // // CARD
-                        // const card = document.createElement("div")
-                        // card.classList.add("card")
-                        // // FLAG
-                        // const flag = document.createElement("img")
-                        // flag.classList.add("flag")
-                        // flag.setAttribute("src", country.flags.png);
-                        // // BODY
-                        // const body = document.createElement("div")
-                        // body.classList.add("body")
-                        // // NAME
-                        // const name = document.createElement("h4")
-                        // name.classList.add("name")
-                        // name.textContent = country.name.common
-                        // // NATIVENAME
-                        // const nativeName = document.createElement("p")
-                        // nativeName.classList.add("nativename")
-                        // nativeName.innerHTML = "Native Name: " + `<span>${Object.values(country.name.nativeName)[0].common}</span>`
-                        // // POPULATION
-                        // const population = document.createElement("p")
-                        // population.classList.add("population")
-                        // population.innerHTML = "Population: " + `<span>${country.population}</span>`
-                        // // REGION
-                        // const region = document.createElement("p")
-                        // region.classList.add("region")
-                        // region.innerHTML = "Region: " + `<span>${country.region}</span>`
-                        // // SUBREGION
-                        // const subRegion = document.createElement("p")
-                        // subRegion.classList.add("subregion")
-                        // subRegion.innerHTML = "Sub Region: " + `<span>${country.subRegion}</span>`
-                        // // CAPITAL
-                        // const capital = document.createElement("p")
-                        // capital.classList.add("capital")
-                        // capital.innerHTML = "Capital: " + `<span>${country.capital}</span>`
-                        // // TOPLEVELDOMAIN
-                        // const topLevelDomain = document.createElement("p")
-                        // topLevelDomain.classList.add("topleveldomain")
-                        // topLevelDomain.innerHTML = "Top Level Domain: " + `<span>${country.tld}</span>`
-                        // // CURRENCIES
-                        // const currencies = document.createElement("p")
-                        // currencies.classList.add("currencies")
-                        // currencies.innerHTML = "Currencies: " + `<span>${Object.values(country.currencies)[0].name}</span>`
-                        // // LANGUAGES
-                        // const languages = document.createElement("p")
-                        // languages.classList.add("languages")
-                        // languages.innerHTML = "Languages: " + `<span>${Object.values(country.languages)}</span>`
-                        // // BORDERCOUNTRIES
-                        // const borderCountries = document.createElement("p")
-                        // borderCountries.classList.add("bordercountries")
-                        // borderCountries.innerHTML = "Border Countries: " + `<span>${country.borders}</span>`
-
-                        // // APPEND
-                        // body.append(name, nativeName, population, region, capital, topLevelDomain, currencies, languages, borderCountries)
-                        // card.appendChild(flag)
-                        // card.appendChild(body)
-                        // userCardContainer.appendChild(card)
 
                         return {
                             flag: country.flags.png,
