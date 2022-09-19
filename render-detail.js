@@ -9,7 +9,7 @@ export const renderDetail = () => {
         .then(res => res.json())
         .then(data => {
             let country = data.map(country => {
-                // if (country.fifa === countryCode) {
+                // if (country.cca3 === countryCode) {
 
                 // // CARD
                 // const card = document.createElement("div")
@@ -140,3 +140,101 @@ export const renderDetail = () => {
             })
         })
 }
+
+// --- DIFFERENT ---
+
+// let value = "";
+// let region;
+
+// fetch("https://restcountries.com/v3.1/all")
+//     .then(res => res.json())
+//     .then(data => {
+
+//         // FILTROWANIE PRZY POBIERANIU DANYCH
+//         // let query = "pol"
+//         // countries = data.filter((country) => country.name.common.toLowerCase().includes(query.toLowerCase())); 
+
+//         countries = data.map(country => {
+
+//             countriesList = renderCountriesList(country);
+
+//             return {
+//                 flag: country.flags.png,
+//                 name: country.name.common,
+//                 population: country.population,
+//                 region: country.region,
+//                 capital: country.capital && country.capital[0] || "",
+//                 element: countriesList
+//             }
+//         });
+//     })
+
+// const filterdataandrendercountries = () => {
+//     const filteredCountries = countries.filter((country) => {
+//         return (
+//             country.name.toLowerCase().includes(value) &&
+//             (!region || country.region.includes(region))
+//         )
+//     })
+//     console.log(filteredCountries)
+//     userCardContainer.innerHTML = "";
+//     filteredCountries.forEach((country) => { userCardContainer.appendChild(country.element); });
+// }
+
+// const createInfoElement = (labelName, value) => {
+//     const info = document.createElement("div")
+//     const labelElement = document.createElement("p");
+//     labelElement.innerHTML = labelName + ": " + `<span>${value}</span>`
+//     info.appendChild(labelElement);
+//     return info;
+// }
+
+// const createCountryItemElement = (country) => {
+//     const link = document.createElement("a")
+//     link.setAttribute("href", "country.html?country=" + country.name.common);
+//     link.classList.add("link")
+//     const card = document.createElement("div")
+//     card.classList.add("card")
+//     const flag = document.createElement("img")
+//     flag.classList.add("flag")
+//     flag.setAttribute("src", country.flags.png);
+//     const body = document.createElement("div")
+//     body.classList.add("body")
+//     const name = document.createElement("h4");
+//     name.classList.add("name")
+//     name.textContent = country.name.common;
+//     link.appendChild(card);
+//     card.appendChild(flag);
+//     card.appendChild(body);
+//     body.appendChild(name);
+//     body.appendChild(createInfoElement("Population", country.population));
+//     body.appendChild(createInfoElement("Region", country.region));
+//     body.appendChild(createInfoElement("Capital", country.capital));
+//     return link;
+// }
+
+// const renderCountriesList = country => {
+//     var countryList = createCountryItemElement(country)
+//     userCardContainer.appendChild(countryList)
+//     return countryList
+// }
+
+// // FILTROWANIE
+
+// searchInput.addEventListener("input", e => {
+//     value = e.target.value.toLowerCase().trim();
+//     filterdataandrendercountries();
+//     // const filteredCountries = countries.filter(country => country.name.toLowerCase().includes(value));
+// })
+
+// // FILTROWANIE - REGION
+
+// filter.forEach((element) => {
+//     element.addEventListener('click', (e) => {
+//         dropbtn.textContent = element.textContent;
+//         region = element.textContent;
+//         filterdataandrendercountries();
+//         // const filteredCountries = countries.filter((country) => country.region === region);
+//         // renderCountriesList(filteredCountries);
+//     })
+// })
